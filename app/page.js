@@ -1,15 +1,35 @@
-import Image from 'next/image'
+import Image from 'next/image';
 import Link from 'next/link';
 
-export default function Home() {
+const Home = () => {
   return (
-    <main>
+    <div className="flex justify-between items-center h-screen p-10">
+      <div className="flex-1 pr-10">
+        {/* Image */}
+        <Image
+          src="public/next.svg" // Replace with your image URL
+          alt="Your Image"
+          width={400}
+          height={300}
+        />
+      </div>
+      <div className="flex-1 flex justify-end items-center">
+        {/* Signup and Login Buttons */}
+        <div className="space-x-4">
+          <Link href="/signup">
+            <span className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+              Signup
+            </span>
+          </Link>
+          <Link href="/login">
+            <span className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+              Login
+            </span>
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-     
-      <Link href="/signup">
-        Signup
-      </Link>
-
-    </main>
-  )
-}
+export default Home;

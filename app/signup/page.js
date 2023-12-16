@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import firebase from '../firebase';
 import { useRouter } from 'next/navigation';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const Signup = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -15,12 +16,13 @@ const Signup = () => {
       await firebase.auth().createUserWithEmailAndPassword(email, password);
       router.push('/login')
     } catch (error) {
-      console.error(error);
+      toast(error.message);
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
+       <ToastContainer />
       <form onSubmit={handleSignup} className="bg-gray-100 p-8 rounded shadow-md">
         <h2 className="text-2xl mb-4">Sign Up</h2>
         <input

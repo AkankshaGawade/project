@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import firebase from '../firebase';
 import { useRouter } from 'next/navigation';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const router = useRouter();
@@ -18,13 +19,14 @@ const Login = () => {
       router.push('/posts');
     } catch (error) {
       // Handle login error
-      console.error(error);
+      toast(error.message);
       // Display toast notification for error (you can use a library like react-toastify)
     }
   };
 
   return (
     <div className="flex justify-center items-center h-screen">
+      <ToastContainer />
       <form onSubmit={handleLogin} className="bg-gray-100 p-8 rounded shadow-md">
         <h2 className="text-2xl mb-4">Login</h2>
         <input
