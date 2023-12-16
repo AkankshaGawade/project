@@ -7,22 +7,22 @@ const Home = () => {
       <div className="flex-1 pr-10">
         {/* Image */}
         <Image
-          src="public/next.svg" // Replace with your image URL
+          src="/social.jpg" // Replace with your image URL
           alt="Your Image"
           width={400}
           height={300}
         />
       </div>
-      <div className="flex-1 flex justify-end items-center">
+      <div className="flex-1 flex justify-center items-center">
         {/* Signup and Login Buttons */}
-        <div className="space-x-4">
+        <div className="text-center">
           <Link href="/signup">
-            <span className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            <span className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded m-2">
               Signup
             </span>
           </Link>
           <Link href="/login">
-            <span className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+            <span className="inline-block bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded m-2">
               Login
             </span>
           </Link>
