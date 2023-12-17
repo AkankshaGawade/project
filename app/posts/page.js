@@ -1,8 +1,12 @@
 
 "use client"
 import { useState, useEffect } from 'react';
+import firebase from '../firebase';
+import { useRouter } from 'next/navigation';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Posts = () => {
+  const router = useRouter();
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;
@@ -20,7 +24,6 @@ const Posts = () => {
 
     fetchPosts();
   }, []);
-
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -32,9 +35,24 @@ const Posts = () => {
     setCurrentPage(pageNumber);
   };
 
+  const handleLogout = async () => {
+    try {
+      await firebase.auth().signOut();
+      console.log('User signed out');
+      toast(" User Signed Out Successfully ");
+      router.push('/'); // Redirect to "/"
+    } catch (error) {
+      toast(error.message);
+      console.error('Sign-out error:', error);
+    }
+  };
+
   return (
     <div className="container">
       <h1>Posts</h1>
+      <button 
+            className="fixed top-0 right-0 p-4 text-white font-bold px-2 py-2 mx-2 my-2 rounded bg-red-400 text-white"
+      onClick={handleLogout}>Logout</button>
       {currentPosts.map((post) => (
         <div key={post.id} className="post">
           <h2>{post.title}</h2>

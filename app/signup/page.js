@@ -20,9 +20,13 @@ const Signup = () => {
     }
   };
 
+  const handleLoginRedirect = () => {
+    router.push('/login'); // Redirect to "/login"
+  };
+
   return (
     <div className="flex justify-center items-center h-screen">
-       <ToastContainer />
+      <ToastContainer />
       <form onSubmit={handleSignup} className="bg-gray-100 p-8 rounded shadow-md">
         <h2 className="text-2xl mb-4">Sign Up</h2>
         <input
@@ -42,6 +46,15 @@ const Signup = () => {
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">
           Sign Up
         </button>
+        <button
+          type="button"
+          className="text-black py-2 rounded"
+          onClick={handleLoginRedirect}
+        >
+          Already have an account? Login
+        </button>
+
+
       </form>
     </div>
   );

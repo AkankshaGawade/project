@@ -16,14 +16,17 @@ const Login = () => {
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
       // Redirect or handle successful login
+      toast(" User Login  Successfully ");
       router.push('/posts');
     } catch (error) {
       // Handle login error
       toast(error.message);
-      // Display toast notification for error (you can use a library like react-toastify)
     }
   };
 
+  const handleSignRedirect = () => {
+    router.push('/signup'); 
+  };
   return (
     <div className="flex justify-center items-center h-screen">
       <ToastContainer />
@@ -46,6 +49,15 @@ const Login = () => {
         <button type="submit" className="w-full bg-blue-500 text-white py-2 rounded">
           Log In
         </button>
+
+        <button
+          type="button"
+          className="text-black py-2 rounded"
+          onClick={handleSignRedirect}
+        >
+            Signup here 
+        </button>
+
       </form>
     </div>
   );
