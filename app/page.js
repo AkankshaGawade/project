@@ -8,7 +8,7 @@ const Home = () => {
         {/* Image */}
         <Image
           src="/social.jpg" // Replace with your image URL
-          alt="Your Image"
+          alt="Social Image"
           width={400}
           height={300}
         />

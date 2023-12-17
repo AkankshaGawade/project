@@ -15,7 +15,6 @@ const Login = () => {
     e.preventDefault();
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      // Redirect or handle successful login
       toast(" User Login  Successfully ");
       router.push('/posts');
     } catch (error) {

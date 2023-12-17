@@ -10,20 +10,33 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 10;
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-        const data = await response.json();
-        setPosts(data);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    };
 
-    fetchPosts();
-  }, []);
+    const unsubscribe = firebase.auth().onAuthStateChanged((authenticatedUser) => {
+      if (authenticatedUser) {
+        setUser(authenticatedUser); 
+        fetchPosts(); 
+      } else {
+        setUser(null); 
+        router.push('/login');
+      }
+    });
+
+    return () => unsubscribe();
+  }, [router]);
+
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+      const data = await response.json();
+      setPosts(data);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
@@ -46,6 +59,10 @@ const Posts = () => {
       console.error('Sign-out error:', error);
     }
   };
+
+  if (!user) {
+    return null; 
+  }
 
   return (
     <div className="container">
