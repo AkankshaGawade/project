@@ -3,16 +3,18 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
 import 'firebase/compat/auth';
 
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey: "AIzaSyCC0d76fA1Zm-f5YrVpcXddcioDSn6wbw4",
-  authDomain: "auth-entitles.firebaseapp.com",
-  projectId: "auth-entitles",
-  storageBucket: "auth-entitles.appspot.com",
-  messagingSenderId: "900035643543",
-  appId: "1:900035643543:web:e8eba9f9a840a77dbcc1d2",
-  measurementId: "G-1VNJM6H2MW"
-
+  apiKey: "AIzaSyAxP-JeYqudR-Qmeqph5ETuAbvVKPFeVQ4",
+  authDomain: "text-to-image-and-video.firebaseapp.com",
+  databaseURL: "https://text-to-image-and-video-default-rtdb.firebaseio.com",
+  projectId: "text-to-image-and-video",
+  storageBucket: "text-to-image-and-video.appspot.com",
+  messagingSenderId: "101152243526",
+  appId: "1:101152243526:web:b0649b1f11fb1ff5722f47",
+  measurementId: "G-SXP821FLL9"
 };
+
 
 if (firebase.apps.length==0) {
   firebase.initializeApp(firebaseConfig);

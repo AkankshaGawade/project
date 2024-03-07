@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import MonsterApiClient from 'monsterapi';
 
+
 const TextToImageGenerator = ({ apiKey }) => {
   const [textInput, setTextInput] = useState('');
+  const [userInput, setUserInput] = useState('');
   const [generatedImage, setGeneratedImage] = useState(null);
+  const [gifUrl, setGifUrl] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleTextToImageGeneration = async () => {
@@ -41,34 +44,72 @@ const TextToImageGenerator = ({ apiKey }) => {
     } finally {
       // Set loading to false after API response or error
       setLoading(false);
-    }
+    }};
+
+    const handleTextToVideoGeneration = async () => {
+      setLoading(true);
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/generate_gif', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'  // Set the content type to JSON
+          },
+          body: JSON.stringify({ user_input: userInput }) 
+        });
+  
+        if (!response.ok) {
+          throw new Error('Failed to generate GIF');
+        }
+  
+        const data = await response.json();
+        setGifUrl(data.gif_url);
+      } catch (error) {
+        console.error(error);
+      }
+      finally {
+        // Set loading to false after API response or error
+        setLoading(false);
+      }
+
   };
 
   return (
     <div className="text-to-image-generator">
-      <h2>Text to Image Generator</h2>
+      
 
       {/* Input for text-to-image generation */}
       <textarea
-        className="text-input"
+        className="text-input text-black"
         placeholder="Enter text for image generation"
         value={textInput}
         onChange={(e) => setTextInput(e.target.value)}
       />
-
+   <div className="button-container">
       {/* Button to trigger text-to-image generation */}
       <button className="generate-btn" onClick={handleTextToImageGeneration}>
         Generate Image
       </button>
-
+      <button className="generate-btn" onClick={handleTextToVideoGeneration}>
+        Generate Video
+      </button>
+</div>
       {/* Display loading indicator while generating the image */}
-      {loading && <p className="loading">Generating image...</p>}
+      {loading && <p className="loading">Generating...</p>}
 
       {/* Display the generated image if available */}
       {generatedImage && (
         <div className="generated-image">
           <h3>Generated Image</h3>
           <img src={generatedImage} alt="Generated" />
+        </div>
+      )}
+{/* Display the generated image if available */}
+{gifUrl && (
+        <div>
+          <h2>Generated GIF</h2>
+          <img src={gifUrl} alt="Generated GIF" />
+          
         </div>
       )}
 
@@ -79,6 +120,16 @@ const TextToImageGenerator = ({ apiKey }) => {
           padding: 20px;
           border: 1px solid #ccc;
           border-radius: 8px;
+        }
+        .button-container {
+          display: flex;
+        }
+        .generate-btn {
+          margin-right: 10px; /* Add space between buttons */
+        }
+        
+        .generate-btn:last-child {
+          margin-right: 0; /* Remove margin for the last button to prevent extra space */
         }
 
         .text-input {

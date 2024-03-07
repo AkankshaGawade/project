@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import TextToImageGenerator from './TextToImage';
+import TextToImageGenerator from './templates/TextToImage';
 
 const Posts = () => {
   const [textInput, setTextInput] = useState('');
@@ -21,7 +21,6 @@ const Posts = () => {
 
   return (
     <div className="container">
-      <h1> Text2Image</h1>
 
       {/* TextToImageGenerator component */}
       <TextToImageGenerator apiKey={apiKey} text={textInput} />

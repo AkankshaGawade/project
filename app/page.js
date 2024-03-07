@@ -7,10 +7,10 @@ const Home = () => {
       <div className="flex-1 pr-10">
         {/* Image */}
         <Image
-          src="/social.jpg" // Replace with your image URL
+          src="/bg.jpeg" // Replace with your image URL
           alt="Social Image"
-          width={400}
-          height={300}
+          width={600}
+          height={600}
         />
       </div>
       <div className="flex-1 flex justify-center items-center">

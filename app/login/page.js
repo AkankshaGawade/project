@@ -15,7 +15,7 @@ const Login = () => {
     e.preventDefault();
     try {
       await firebase.auth().signInWithEmailAndPassword(email, password);
-      toast(" User Login  Successfully ");
+      toast(" User Login  Successful ");
       router.push('/posts');
     } catch (error) {
       // Handle login error
@@ -27,16 +27,16 @@ const Login = () => {
     router.push('/signup'); 
   };
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-screen bg-cyan-200">
       <ToastContainer />
-      <form onSubmit={handleLogin} className="bg-gray-100 p-8 rounded shadow-md">
-        <h2 className="text-2xl mb-4">Login</h2>
+      <form onSubmit={handleLogin} className="bg-slate-200 p-8 rounded shadow-md text-black">
+        <h2 className="text-2xl mb-4 ">Login</h2>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full mb-4 p-2 rounded border"
+          className="w-full mb-4 p-2 rounded border text-black"
         />
         <input
           type="password"
